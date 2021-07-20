@@ -1,11 +1,11 @@
 #include <stdlib.h>
-#include "colours.h"
+#include "utils.h"
 
 #define PIN_BLUE 6
 #define PIN_GREEN 5
 #define PIN_RED 3
 
-#define COL_CHANGE_TIME 3000
+#define COL_FADE_TIME 5000
 
 //This variable is just used for storing some state depending on the mode
 uint8_t colMode;
@@ -56,7 +56,7 @@ void loop() {
     if (colMode == 2)
       fadeTo(COL_BLUE);
     colMode++;
-    delay(1000);
+    delay(2000);
   }
 }
 
@@ -73,7 +73,7 @@ void fadeTo(uint32_t col) {
 
   //Get the number of steps that need to be traversed to reach the target colour (max of red, green or blue)
   uint8_t maxStep = max(max(abs(red - rCurr), abs(green - gCurr)), abs(blue - bCurr));
-  uint8_t del = COL_CHANGE_TIME / maxStep;
+  uint8_t del = COL_FADE_TIME / maxStep;
 
   //Loop while we haven't yet reached the target colours
   while (rCurr != red || bCurr != blue || gCurr != green) {
