@@ -5,3 +5,5 @@
 #define HEX_TO_RED(colour) (uint8_t)(colour >> 16)
 #define HEX_TO_GREEN(colour) (uint8_t)(colour >> 8) & 0xff
 #define HEX_TO_BLUE(colour) (uint8_t)colour & 0x0000ff
+
+#define RGB_TO_HEX(red, green, blue) (uint32_t)(red << 16 | green << 8 | blue)

@@ -29,19 +29,17 @@ void setup() {
 
 void loop() {
   if (getSwitches() == 0b0000) {
-    /*
     colMode = random() % 6;
     if (colMode == 0)
-      fadeTo(random() % 156 + 100, random() % 100, random() % 100);
+      fadeTo(RGB_TO_HEX(random() % 156 + 100, random() % 100, random() % 100));
     else if (colMode == 1)
-      fadeTo(random() % 100, random() % 156 + 100, random() % 100);
+      fadeTo(RGB_TO_HEX(random() % 100, random() % 156 + 100, random() % 100));
     else if (colMode == 2)
-      fadeTo(random() % 100, random() % 100, random() % 156 + 100);
+      fadeTo(RGB_TO_HEX(random() % 100, random() % 100, random() % 156 + 100));
     else if (colMode == 3)
-      fadeTo(random() % 156 + 100, random() % 156 + 100, random() % 100);
+      fadeTo(RGB_TO_HEX(random() % 156 + 100, random() % 156 + 100, random() % 100));
     else if (colMode == 4)
-      fadeTo(random() % 100, random() % 156 + 100, random() % 156 + 100);
-      */
+      fadeTo(RGB_TO_HEX(random() % 100, random() % 156 + 100, random() % 156 + 100));
   } else if (getSwitches() == 0b0001) {
     writeColour(COL_RED);
   } else if (getSwitches() == 0b0010) {
