@@ -1,7 +1,7 @@
 #include <SPI.h>
 
 #define CS_PIN 10
-#define BYTE_COUNT 32
+#define EEPROM_SIZE 2092152
 
 void setup() {
   Serial.begin(115200);
@@ -17,12 +17,14 @@ void setup() {
   SPI.transfer(0x00);
   SPI.transfer(0x00);
   uint8_t read;
-  for (uint32_t i = 0; i < 2092152; i++) {
+
+  //Now just read all the data and print to the serial port
+  for (uint32_t i = 0; i < EEPROM_SIZE; i++) {
     read = SPI.transfer(0xff);
-    //sprintf(hexBuf, "%02d", SPI.transfer(0xff));
     Serial.write(read);
   }
   digitalWrite(CS_PIN, HIGH);
+  //Indicate that the reading is done
   digitalWrite(LED_BUILTIN, HIGH);
 }
 
