@@ -2,6 +2,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include "secret.h"
+#include "index.h"
 
 Servo x;
 Servo y;
@@ -9,13 +10,19 @@ Servo y;
 ESP8266WebServer server;
 
 //Callback function for /setPos request
-void servoPost() {
+void setPos() {
   String posX = server.arg("x");
   String posY = server.arg("y");
   x.write(posX.toInt());
   y.write(posY.toInt());
   delay(15);
   server.send(200, "text/plane","");
+}
+
+//Callback function for / request
+void root() {
+  String res = page;
+  server.send(200, "text/html", res);
 }
 
 void setup() {
@@ -39,7 +46,8 @@ void setup() {
   //We have connected; set LED high
   digitalWrite(ledState, 1);
 
-  server.on("/setPos", servoPost);
+  server.on("/setPos", setPos);
+  server.on("/", root);
   server.begin();
 }
 
