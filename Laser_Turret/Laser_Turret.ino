@@ -9,8 +9,10 @@ Servo y;
 ESP8266WebServer server;
 
 void servoPost() {
-  String pos = server.arg("servoPOS");
-  x.write(pos.toInt());
+  String posX = server.arg("servoPosX");
+  String posY = server.arg("servoPosY");
+  x.write(posX.toInt());
+  y.write(posY.toInt());
   delay(15);
   server.send(200, "text/plane","");
 }
@@ -34,7 +36,7 @@ void setup() {
 
   digitalWrite(ledState, 1);
 
-  server.on("/setPOS", servoPost);
+  server.on("/set", servoPost);
   server.begin();
 }
 
