@@ -8,6 +8,7 @@ Servo y;
 
 ESP8266WebServer server;
 
+//Callback function for /set request
 void servoPost() {
   String posX = server.arg("servoPosX");
   String posY = server.arg("servoPosY");
@@ -34,6 +35,7 @@ void setup() {
     ledState = !ledState;
   }
 
+  //We have connected; set LED high
   digitalWrite(ledState, 1);
 
   server.on("/set", servoPost);
