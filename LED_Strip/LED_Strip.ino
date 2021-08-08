@@ -57,6 +57,19 @@ void loop() {
       fadeTo(COL_BLUE);
     colMode++;
     delay(2000);
+  } else if (getSwitches() == 0b0101) {
+    writeColour(COL_BLUE);
+    writeColour(COL_RED);
+  } else if (getSwitches() == 0b0110) {
+    writeColour(COL_BLUE);
+    writeColour(COL_GREEN);
+  } else if (getSwitches() == 0b0111) {
+    writeColour(COL_GREEN);
+    writeColour(COL_RED);
+  } else if (getSwitches() == 0b1000) {
+    writeColour(COL_BLUE);
+    writeColour(COL_RED);
+    writeColour(COL_GREEN);
   }
 }
 
