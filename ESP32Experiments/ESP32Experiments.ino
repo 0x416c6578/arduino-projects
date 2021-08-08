@@ -19,7 +19,7 @@ void setup() {
 
   WiFi.setHostname("ESP32");
   WiFi.mode(WIFI_STA);
-  WiFi.begin("BT-Home", "3MpDHpFMHNgHcD");
+  WiFi.begin(SSID, PSK);
 
   tft.setCursor(0,0);
   tft.println("Connecting...");
