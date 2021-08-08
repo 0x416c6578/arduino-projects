@@ -8,10 +8,10 @@ Servo y;
 
 ESP8266WebServer server;
 
-//Callback function for /set request
+//Callback function for /setPos request
 void servoPost() {
-  String posX = server.arg("servoPosX");
-  String posY = server.arg("servoPosY");
+  String posX = server.arg("x");
+  String posY = server.arg("y");
   x.write(posX.toInt());
   y.write(posY.toInt());
   delay(15);
@@ -27,6 +27,7 @@ void setup() {
   y.write(90);
 
   WiFi.begin(SSID, PSK);
+  WiFi.setHostname("laser");
 
   bool ledState = false;
   while (WiFi.status() != WL_CONNECTED) {
@@ -38,7 +39,7 @@ void setup() {
   //We have connected; set LED high
   digitalWrite(ledState, 1);
 
-  server.on("/set", servoPost);
+  server.on("/setPos", servoPost);
   server.begin();
 }
 
