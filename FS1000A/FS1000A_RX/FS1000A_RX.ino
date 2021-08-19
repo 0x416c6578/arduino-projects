@@ -1,23 +1,29 @@
 #include <RH_ASK.h>
 #include <SPI.h>
 
+#define BUF_LEN 50
+
 RH_ASK driver;
+uint8_t buf[BUF_LEN];
+uint8_t buflen;
 
 void setup() {
-  Serial.begin(9600); // Debugging only
-  if (!driver.init())
-    Serial.println("init failed");
-  else
-    Serial.println("Init success");
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  if (!driver.init()) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    for (;;) {}
+  }
 }
 
 void loop() {
-  uint8_t buf[12];
-  uint8_t buflen = sizeof(buf);
-  if (driver.recv(buf, &buflen)) { // Non-blocking
-    int i;
-// Message with a good checksum received, dump it.
-    Serial.print("Message: ");
-    Serial.println((char*)buf);
+  buflen = sizeof(buf);
+
+  if (driver.recv(buf, &buflen)) {
+    //Print the message followed by the size of that received message
+    Serial.print((char*) buf);
+    Serial.print(" [");
+    Serial.print(buflen);
+    Serial.println("]");
   }
 }
