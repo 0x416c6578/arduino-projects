@@ -9,6 +9,8 @@ This is a program that uses cv2 to track a face and
 KEY_ESC = 0x1b
 
 FRAME_SKIP = 4 # TODO: Implement frame skipping for face detection
+
+# Size of image used for face detection
 DETECT_W = 320
 DETECT_H = 240
 
