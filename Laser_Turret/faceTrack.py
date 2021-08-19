@@ -45,7 +45,10 @@ while True:
       maxArea = w*h
   if maxArea > 0 :
     # Draw dot on center of face
-    cv2.rectangle(resizedFrame, (x+(w//2)-1, y+(h//2)-1), (x+(w//2)+1, y+(h//2)+1), (0,255,0), 2)
+    cv2.rectangle(resizedFrame, 
+                  (x+(w//2)-1, y+(h//2)-1),
+                  (x+(w//2)+1, y+(h//2)+1),
+                  (0,255,0), 2)
 
   # Show frame
   cv2.imshow("Feed", cv2.resize(cv2.flip(resizedFrame, 1), (640, 480)))
