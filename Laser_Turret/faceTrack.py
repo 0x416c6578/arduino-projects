@@ -59,7 +59,9 @@ while True:
   _, newFrame = webcam.read()
 
   # Draw circle in center of face
-  cv2.circle(newFrame, getFacePos(newFrame), 2, (0,255,0), 2)
+  pos = getFacePos(newFrame)
+  if pos != (0,0):
+    cv2.circle(newFrame, getFacePos(newFrame), 2, (0,255,0), 2)
 
   # Show frame
   cv2.imshow("Feed", cv2.flip(newFrame, 1))

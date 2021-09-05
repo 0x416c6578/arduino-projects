@@ -9,17 +9,25 @@ Servo y;
 
 ESP8266WebServer server;
 
-//Callback function for /setPos request
+//Handler for /setPos request
 void setPos() {
   String posX = server.arg("x");
   String posY = server.arg("y");
   x.write(posX.toInt());
   y.write(posY.toInt());
   delay(15);
-  server.send(200, "text/plane","");
+  server.send(200, "text/plane", "");
 }
 
-//Callback function for / request
+//Hander for /home request
+void home() {
+  x.write(90);
+  y.write(90);
+  delay(15);
+  server.send(200, "text/plane", "");
+}
+
+//Handler for / request
 void root() {
   String res = page;
   server.send(200, "text/html", res);
@@ -47,6 +55,7 @@ void setup() {
   digitalWrite(ledState, 1);
 
   server.on("/setPos", setPos);
+  server.on("/home", home);
   server.on("/", root);
   server.begin();
 }
