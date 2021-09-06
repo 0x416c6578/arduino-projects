@@ -44,8 +44,17 @@ void setup() {
   WiFi.begin(SSID, PSK);
   WiFi.setHostname("laser");
 
+  ulong startTime = millis();
   bool ledState = false;
   while (WiFi.status() != WL_CONNECTED) {
+    if (millis() - startTime > 30000) {
+      //If we hit over 30 seconds of trying to connect, indicate that to the user
+      for (int i = 0; i < 1; i++) {
+        digitalWrite(LED_BUILTIN, ledState);
+        ledState = !ledState;
+        delay(100);
+      }
+    }
     delay(500);
     digitalWrite(LED_BUILTIN, ledState);
     ledState = !ledState;
