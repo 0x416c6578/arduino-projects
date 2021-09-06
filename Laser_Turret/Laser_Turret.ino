@@ -1,6 +1,7 @@
 #include <Servo.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+//secret.h contains SSID and PSK for wifi connection
 #include "secret.h"
 #include "index.h"
 
