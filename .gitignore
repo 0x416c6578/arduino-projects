@@ -3,3 +3,4 @@ libraries/
 **/.astylerc
 **/secret.h
 XV_Lidar_Controller-master/
+Laser_Turret/laserTurretCV/target/
