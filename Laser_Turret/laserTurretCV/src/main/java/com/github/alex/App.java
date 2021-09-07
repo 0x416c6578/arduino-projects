@@ -1,14 +1,9 @@
 package com.github.alex;
 
-import org.apache.lucene.util.ThreadInterruptedException;
 import org.openimaj.video.VideoDisplay;
 import org.openimaj.video.capture.VideoCapture;
 import org.openimaj.video.capture.VideoCaptureException;
 
-/**
- * OpenIMAJ Hello world!
- *
- */
 public class App {
     public static void main( String[] args ) {
       try {
