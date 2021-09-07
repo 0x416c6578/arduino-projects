@@ -1,11 +1,9 @@
 package com.github.alex;
 
-import org.openimaj.image.DisplayUtilities;
-import org.openimaj.image.MBFImage;
-import org.openimaj.image.colour.ColourSpace;
-import org.openimaj.image.colour.RGBColour;
-import org.openimaj.image.processing.convolution.FGaussianConvolve;
-import org.openimaj.image.typography.hershey.HersheyFont;
+import org.apache.lucene.util.ThreadInterruptedException;
+import org.openimaj.video.VideoDisplay;
+import org.openimaj.video.capture.VideoCapture;
+import org.openimaj.video.capture.VideoCaptureException;
 
 /**
  * OpenIMAJ Hello world!
@@ -13,19 +11,17 @@ import org.openimaj.image.typography.hershey.HersheyFont;
  */
 public class App {
     public static void main( String[] args ) {
-    	//Create an image
-        MBFImage image = new MBFImage(320,70, ColourSpace.RGB);
-
-        //Fill the image with white
-        image.fill(RGBColour.WHITE);
-        		        
-        //Render some test into the image
-        image.drawText("Hello World", 10, 60, HersheyFont.CURSIVE, 50, RGBColour.BLACK);
-
-        //Apply a Gaussian blur
-        image.processInplace(new FGaussianConvolve(2f));
-        
-        //Display the image
-        DisplayUtilities.display(image);
+      try {
+        //Capture for 10s then exit...
+        VideoCapture cap = new VideoCapture(640, 480);
+        VideoDisplay.createVideoDisplay(cap);
+        Thread.sleep(10000);
+        cap.close();
+        System.exit(0);
+      } catch (VideoCaptureException e) {
+        e.printStackTrace();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
 }
