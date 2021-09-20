@@ -3,12 +3,13 @@
 
 #define BUF_LEN 50
 
-RH_ASK driver;
+RH_ASK driver(1000, 8);
 uint8_t buf[BUF_LEN];
 uint8_t buflen;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(118200);
 
   if (!driver.init()) {
     digitalWrite(LED_BUILTIN, HIGH);

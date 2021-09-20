@@ -1,5 +1,13 @@
 #include <stdlib.h>
 #include "utils.h"
+#include <RH_ASK.h>
+#include <SPI.h>
+
+#define BUF_LEN 20
+
+RH_ASK driver(2000, 8);
+uint8_t rxBuf[BUF_LEN];
+uint8_t bufLen;
 
 #define PIN_BLUE 6
 #define PIN_GREEN 5
@@ -16,6 +24,25 @@ uint8_t rCurr = 0,
         bCurr = 0;
 
 void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(115200); //Serial for debugging
+
+  //If for whatever reason the RadioHead driver fails, turn on LED
+  if (!driver.init()) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    for (;;) {}
+  }
+
+  //Indicate that the RadioHead driver is working
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
@@ -27,6 +54,7 @@ void setup() {
   pinMode(9, INPUT_PULLUP);
 }
 
+/*
 void loop() {
   if (getSwitches() == 0b0000) {
     colMode = random() % 6;
@@ -70,6 +98,33 @@ void loop() {
     writeColour(COL_BLUE);
     writeColour(COL_RED);
     writeColour(COL_GREEN);
+  }
+}
+*/
+
+void loop() {
+  bufLen = sizeof(rxBuf);
+
+  if (driver.recv(rxBuf, &bufLen)) {
+    //Print the message followed by the size of that received message
+    Serial.print((char*) rxBuf);
+    Serial.print(" [");
+    Serial.print(bufLen);
+    Serial.println("]");
+
+    //Testing of receiving colours
+    if (strstr((char*)rxBuf, "RED")) {
+      Serial.println("Switching to red");
+      writeColour(COL_RED);
+    }
+    if (strstr((char*)rxBuf, "GREEN")) {
+      Serial.println("Switching to green");
+      writeColour(COL_GREEN);
+    }
+    if (strstr((char*)rxBuf, "BLUE")) {
+      Serial.println("Switching to blue");
+      writeColour(COL_BLUE);
+    }
   }
 }
 
