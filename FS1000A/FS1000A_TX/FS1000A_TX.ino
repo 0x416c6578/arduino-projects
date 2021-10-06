@@ -9,7 +9,6 @@ void setup() {
 
   if (!driver.init())
     digitalWrite(LED_BUILTIN, HIGH);
-
   driver.setModeTx();
 }
 

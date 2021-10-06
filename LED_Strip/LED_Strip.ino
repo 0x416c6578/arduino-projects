@@ -27,6 +27,8 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200); //Serial for debugging
 
+  pinMode(8, INPUT);
+
   //If for whatever reason the RadioHead driver fails, turn on LED
   if (!driver.init()) {
     digitalWrite(LED_BUILTIN, HIGH);
