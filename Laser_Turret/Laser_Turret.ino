@@ -50,7 +50,7 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     if (millis() - startTime > 30000) {
       //If we hit over 30 seconds of trying to connect, indicate that to the user
-      for (int i = 0; i < 1; i++) {
+      for (int i = 0; i < 10; i++) {
         digitalWrite(LED_BUILTIN, ledState);
         ledState = !ledState;
         delay(100);
