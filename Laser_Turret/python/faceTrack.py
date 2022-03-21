@@ -33,7 +33,7 @@ def getFacePos(image):
   # Find faces (magic)
   faces = faceCascade.detectMultiScale(grey, 1.3, 5)
 
-  # Simple algorithm to find largest face (from https://www.guidodiepen.nl/2017/02/detecting-and-tracking-a-face-with-python-and-opencv/)
+  # Simple algorithm to find largest face
   maxArea = 0
   x = 0
   y = 0
